@@ -4,6 +4,10 @@ import re, os, random, string, shutil
 
 import unittest
 
+def deleting(path, regular,num_thread):
+    print "s"
+
+
 def randstring(path):
     a = string.ascii_letters + string.digits
     name=[random.choice(a) for i in range(5)]
