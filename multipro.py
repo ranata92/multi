@@ -1,7 +1,6 @@
 from datetime import datetime
 import re, os, random, string, shutil
 
-def deleting(path,regular,num_threads):
 
 import unittest
 
@@ -10,7 +9,7 @@ def randstring(path):
     name=[random.choice(a) for i in range(5)]
     file_name=""
     for i in name:
-        file_name=file_name + str(i)
+        file_name += str(i)
     file_name=file_name+".txt"
     file=open(path+file_name,"w")
     file.close
@@ -19,21 +18,22 @@ class tests(unittest.TestCase):
     def setUp(self):
         self.path='/media/70CCDC1FCCDBDE02/temp'
         self.path2='/media/70CCDC1FCCDBDE02/temp2'
-        self.path2='/media/70CCDC1FCCDBDE02/temp3'
-        self.path2='/media/70CCDC1FCCDBDE02/temp4'
-        os.mkdir(path,0755)
+        self.path3='/media/70CCDC1FCCDBDE02/temp3'
+        self.path4='/media/70CCDC1FCCDBDE02/temp4'
+        os.mkdir(self.path,0755)
         shutil.copytree(self.path, self.path2)
         shutil.copytree(self.path, self.path3)
         shutil.copytree(self.path, self.path4)
         for i in range(1000):
             randstring(self.path)
-        self.regular=("[A-Z][a-z].*", "[a-z][a-z].*", "[A-Z][A-Z].*", "\d[A-Z].*", "\d[a-z].*","[A-Z]\d.*")
+        self.regular=("[A-Z][a-z].*", "[a-z][a-z].*", "[A-Z][A-Z].*", "\d[A-Z].*", "\d[a-z].*","[A-Z]\d.*","[a-z]\d.*")
         self.num_thread=3
         self.num_thread2=10
 
     def test_kolfile(self):
-        for i in range(5)
+        for i in range(5):
             deleting(self.path,self.regular[i],self.num_thread)
+            print self.regular[0]
             pattern = re.compile(self.regular[i])
             kol_full=0
             kol_match=0
@@ -48,7 +48,7 @@ class tests(unittest.TestCase):
             deleting(self.path2,self.regular[i],self.num_thread)
 
     def test_del(self):
-        pattern = re.compile(self.regular)
+        pattern = re.compile(self.regular[6])
         kol_match=0
         for names in os.listdir(self.path):
             if pattern.match(names):
@@ -64,4 +64,5 @@ class tests(unittest.TestCase):
         time2=time.time()-t
         self.assertTrue(time2<time1)
 
-    unittest.main()
+unittest.main()
+
